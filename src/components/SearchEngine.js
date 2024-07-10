@@ -223,7 +223,7 @@ const SearchEngine = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 className="text-gray-400 hover:text-gray-600"
-                onClick={clearSearch}
+                onClick={() => setQuery('')}
               >
                 <X size={20} />
               </motion.button>
@@ -262,16 +262,16 @@ const SearchEngine = () => {
                 Résumé IA
               </h2>
               <p style={{ color: colors.text }}>{aiSummary}</p>
-              <div className="mt-4 flex gap-2 justify-center">
+              <div className="mt-4 flex justify-between items-stretch gap-2">
                 {suggestions.map((suggestion, index) => (
-                  <div key={index} className="flex-grow-0 flex-shrink-0">
+                  <div key={index} className="flex-grow">
                     <ChatBubble
                       onClick={() => {
                         setQuery(suggestion);
                         performSearch(suggestion);
                       }}
                       colors={colors}
-                      style={{ maxWidth: '200px', whiteSpace: 'normal' }}
+                      style={{ height: '100%', whiteSpace: 'normal', textAlign: 'center' }}
                     >
                       {suggestion}
                     </ChatBubble>
