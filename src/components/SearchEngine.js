@@ -75,6 +75,7 @@ const SearchEngine = () => {
     setResults([]);
     setAiSummary('');
     setSuggestions([]);
+    setHasSearched(false);
     setIsSummaryComplete(false);
     setIsFollowUpOpen(false);
     setIsSearching(false);
@@ -102,6 +103,13 @@ const SearchEngine = () => {
       setIsSearching(false);
       setIsGeneratingSummary(false);
     }
+  };
+
+  const handleReset = () => {
+    clearSearch();
+    setQuery('');
+    setIsSummaryComplete(false);
+    setIsSearching(false);
   };
 
   const totalPages = Math.ceil(results.length / RESULTS_PER_PAGE);
@@ -174,7 +182,7 @@ const SearchEngine = () => {
         </motion.div>
 
         <motion.div 
-          className="relative w-full"
+          className="relative w-full flex items-center"
           initial={false}
           animate={{
             width: hasSearched ? '100%' : '80%',
@@ -182,6 +190,14 @@ const SearchEngine = () => {
           }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
+          {hasSearched && (
+            <button
+              onClick={handleReset}
+              className="px-3 py-1 bg-gray-300 text-gray-700 rounded-full hover:bg-gray-400 mr-4"
+            >
+              Reset
+            </button>
+          )}
           <input
             ref={searchRef}
             type="text"
@@ -246,18 +262,19 @@ const SearchEngine = () => {
                 Résumé IA
               </h2>
               <p style={{ color: colors.text }}>{aiSummary}</p>
-              <div className="mt-4 flex gap-2 justify-center">
+              <div className="mt-4 flex gap-2 justify-center flex-wrap">
                 {suggestions.map((suggestion, index) => (
-                  <ChatBubble
-                    key={index}
-                    onClick={() => {
-                      setQuery(suggestion);
-                      performSearch(suggestion);
-                    }}
-                    colors={colors}
-                  >
-                    {suggestion}
-                  </ChatBubble>
+                  <div key={index} className="flex-grow" style={{ minWidth: '30%' }}>
+                    <ChatBubble
+                      onClick={() => {
+                        setQuery(suggestion);
+                        performSearch(suggestion);
+                      }}
+                      colors={colors}
+                    >
+                      {suggestion}
+                    </ChatBubble>
+                  </div>
                 ))}
               </div>
               <div className="mt-4">
