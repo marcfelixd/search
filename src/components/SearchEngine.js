@@ -262,15 +262,16 @@ const SearchEngine = () => {
                 Résumé IA
               </h2>
               <p style={{ color: colors.text }}>{aiSummary}</p>
-              <div className="mt-4 flex gap-2 justify-center flex-wrap">
+              <div className="mt-4 flex gap-2 justify-center">
                 {suggestions.map((suggestion, index) => (
-                  <div key={index} className="flex-grow" style={{ minWidth: '30%' }}>
+                  <div key={index} className="flex-grow-0 flex-shrink-0">
                     <ChatBubble
                       onClick={() => {
                         setQuery(suggestion);
                         performSearch(suggestion);
                       }}
                       colors={colors}
+                      style={{ maxWidth: '200px', whiteSpace: 'normal' }}
                     >
                       {suggestion}
                     </ChatBubble>
