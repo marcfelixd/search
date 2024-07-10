@@ -16,11 +16,11 @@
 
 import axios from 'axios';
 
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+//const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
-const API_BASE_URL = CORS_PROXY + "https://my-flask-app-2gm2h4jy2q-od.a.run.app"
+//const API_BASE_URL = CORS_PROXY + "https://my-flask-app-2gm2h4jy2q-od.a.run.app"
 
-// const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 // const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://my-flask-app';
 const API_KEY = process.env.REACT_APP_API_KEY;
